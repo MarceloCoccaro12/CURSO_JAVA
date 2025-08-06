@@ -32,7 +32,7 @@ public class CalculadoraSimples {
 
         Scanner scanner3 = new Scanner(System.in);
 
-        System.out.print("(+)(-)(*)(/): ");
+        System.out.print("Escolha um operador (+)(-)(*)(/): ");
 
         String operador = scanner3.nextLine();
         
