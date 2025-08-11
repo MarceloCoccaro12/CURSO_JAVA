@@ -31,5 +31,26 @@ public class Produto {
     public String getPreco(){
         return String.format("R$%.2f", preco);
     }
-    
+
+    public String getProdutoInfo(){
+        return "Nome: " +this.getNome() + ", Preço: " +this.getPreco();
+    }
+
+    public void aplicarDesconto(double porcentagem){
+        if(porcentagem > 0 && porcentagem <= 100){
+
+            double desconto = calcularDesconto(porcentagem);
+            this.preco -= desconto;
+
+            System.out.println("Desconto de "+ porcentagem + "% aplicado!");
+            System.out.println(this.getProdutoInfo());
+            
+        } else{
+            System.out.println("Porcentagem inválida.");
+        }
+    }
+
+    private double calcularDesconto(double porcentagem){
+        return (this.preco * porcentagem) / 100;
+    }
 }
