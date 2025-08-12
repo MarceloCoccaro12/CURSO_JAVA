@@ -72,6 +72,30 @@ public class Exercicios {
         a1.exibirInfo();
         a2.exibirInfo();
 
+        // exercício 3
+
+        ContaCorrente conta1 = new ContaCorrente("Marcelo", 1500, 500);
+
+        conta1.depositar(1000);
+        conta1.sacar(20);
+        conta1.exibirSaldo();
+
+        // Exercício 4
+
+        PordutoEletronico microondas = new PordutoEletronico("Microondas", 400, 6);
+
+        microondas.aplicarDesconto(15);
+        microondas.exibir();
+        
+        // exercicio 5
+
+        LivroBiblioteca livro1 = new LivroBiblioteca("Java Como Programar", "Fulano", true);
+
+        livro1.devolver();
+        livro1.pregarEmprestado();
+        livro1.pregarEmprestado();
+        livro1.devolver();
+
 
 
     }
