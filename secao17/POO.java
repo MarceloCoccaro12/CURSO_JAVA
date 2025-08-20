@@ -50,7 +50,45 @@ public class POO {
         System.out.println(funcionario.calcularBonus());
         System.out.println(gerente.calcularBonus());
 
+        // 6 - Classe abstrata
+        InstrumentoMusical violao = new Violao("Violão");
+        InstrumentoMusical bateria = new Bateria("Bateria");
 
+        violao.exibirDetalhes();
+        bateria.exibirDetalhes();
         
+        violao.tocar();
+        bateria.tocar();
+
+        // 7 - Interfaces
+        Pagamento cartao = new CartaoCredito();
+        Pagamento transf = new TransferenciaBancaria();
+
+        cartao.processarPagamento(100);
+        cartao.exibirRecibo(100);
+
+        transf.processarPagamento(250);
+        transf.exibirRecibo(250);
+
+        // 8 - Multiplas interfaces
+        Documento doc = new Documento("Arquivo de texto");
+        doc.salvar();
+        doc.imprimir();
+        doc.instrucaoParaSalvar();
+
+        // 9 - Default methods nas interfaces
+        CalculadoraAvancada calc = new CalculadoraAvancada();
+
+        System.out.println(calc.somar(4,5));
+        System.out.println(calc.multiplicar(4, 5));
+        
+        // 10 -Poilimorfismo
+
+        // classes abstratas ou interfaces -> sobreescreveros métodos desta superclasse
+        InstrumentoMusical violino = new Violino("Violino");
+
+        violino.exibirDetalhes();
+        violino.tocar();
+
     }
 }
