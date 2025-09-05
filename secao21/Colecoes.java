@@ -1,6 +1,7 @@
 package secao21;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class Colecoes {
     
@@ -144,9 +145,224 @@ public class Colecoes {
 
         System.out.println(produtoPrecoMap.containsValue(11.50));
 
+        System.out.println();
+        // 4 -iterando
 
+        // for-each
+        for(String nome : nomes){
 
+            System.out.println(nome);
+        }
 
+        // Iterator
+        Iterator<String> nomesIterator = nomes.iterator();
+
+        // remover um elemento
+        while(nomesIterator.hasNext()){
+
+            String nome = nomesIterator.next();
+
+            if(nome.equals("João")){
+                nomesIterator.remove();
+            }
+        }
+
+        System.out.println(nomes);
+
+        // ListIterator
+        ListIterator<String> listIteratorNomes = listaDeNomes.listIterator();
+
+        while(listIteratorNomes.hasNext()){
+            System.out.println("Nome: "+listIteratorNomes.next());
+        }
+
+        while(listIteratorNomes.hasPrevious()){
+            System.out.println("Nome: "+listIteratorNomes.previous());
+        }
+    
+        System.out.println();
+        // 5 - Collections imutáveis
+
+        // criando lista imutavel
+        List<String> listaMutavel = new ArrayList<>();
+
+        listaMutavel.add("teste");
+        listaMutavel.add("testando");
+
+        List<String> listaImutavel = Collections.unmodifiableList(listaMutavel);
+
+        System.out.println(listaImutavel);
+
+        // nao podemos adicionar novos elementos
+        // listaImutavel.add("teste2");
+
+        List<String> listaImutavel2 = List.of("item1", "item2","item3");
+
+        // listaImutavel.add("Item 4");
+
+        System.out.println(listaImutavel2);
+
+        Set<Integer> listaImutavelSet = Set.of(1,2,3);
+
+        // listaImutavelSet.add(4);
+
+        System.out.println(listaImutavelSet);
+
+        System.out.println();
+        // 6 - Filter
+
+        List<Integer> numerosFiltrados =  numeros.stream().filter(numero -> numero > 3).collect(Collectors.toList());
+
+        System.out.println(numeros);
+        System.out.println(numerosFiltrados);
+
+        System.out.println();
+        // 7 - busca
+
+        // for
+        int numeroParaEncontrar = 4;
+
+        boolean encontrou = false;
+        for(Integer numero : numeros){
+            if(numero == numeroParaEncontrar){
+                encontrou = true;
+            }
+        }
+        System.out.println(numeros);
+
+        System.out.println("Encontrou? " + encontrou);
+
+        // contains
+        String nomeBuscado = "Carlos";
+        boolean encontrou2 = nomes.contains(nomeBuscado);
+
+        System.out.println(nomes);
+        System.out.println("Encontrou nome?: "+ encontrou2);
+
+        // findAny
+        Optional<Integer> qualquerNumero = numeros.stream().findAny();
+
+        System.out.println(qualquerNumero);
+
+        Optional<Integer> primeroNumero = numeros.stream().findFirst();
+
+        System.out.println(primeroNumero);
+
+        Optional<Integer> primerioPar = numeros.stream().filter(num -> num % 2 == 0).findFirst();
+
+        System.out.println(primerioPar);
+
+        System.out.println();
+
+        // 8 - Map
+        // modificam a collection
+
+        List<Integer> quadrados = numeros.stream()
+                                    .map(n -> n * n)
+                                    .collect(Collectors.toList());
+        
+        System.out.println(numeros);
+        System.out.println(quadrados);
+
+        List<String> nomeMaiusculos = nomes.stream()
+                                        .map(String::toUpperCase)
+                                        .collect(Collectors.toList());
+        
+        System.out.println(nomeMaiusculos);
+
+        System.out.println();
+
+        // modificacao
+
+        numeros.add(50);
+
+        System.out.println(numeros);
+
+        // remove elementos pelo valor
+        numeros.remove(Integer.valueOf(3));
+
+        System.out.println(numeros);
+
+        // alterar todos os elementos
+        numeros.replaceAll(numero -> numero * 3);
+
+        System.out.println(numeros);
+
+        numeros.add(201);
+        numeros.add(205);
+        numeros.add(208);
+
+        System.out.println(numeros);
+
+        // remocao baseada em condicao
+
+        numeros.removeIf(numero -> numero > 200);
+
+        System.out.println(numeros); 
+
+        System.out.println();
+        // 10 - reduce
+
+        int soma = numeros.stream()
+                .reduce(0, (acumulador, numero) -> acumulador + numero);
+    
+        System.out.println("Soma de todos os números: " + soma);
+
+        String frase = nomes.stream()
+                .reduce("", (concatenador, nome) -> concatenador + " " + nome);
+
+        System.out.println(frase);
+
+        System.out.println();
+        // 11 - ordenacao com comparator
+
+        List<Pessoa> pessoas = new ArrayList<>();
+
+        pessoas.add(new Pessoa("Pedro", 33));
+        pessoas.add(new Pessoa("Ana", 25));
+        pessoas.add(new Pessoa("João", 67));
+        pessoas.add(new Pessoa("Maria", 18));
+        pessoas.add(new Pessoa("Rodrigo", 40));
+
+        // ordenar pelo nome
+        pessoas.sort(Comparator.comparing(Pessoa::getNome));
+
+        for(Pessoa pessoa : pessoas){
+            System.out.println(pessoa);
+        }
+
+        // Ordenar pelo nome e idade
+
+        pessoas.sort(Comparator.comparing(Pessoa::getNome)
+                                .thenComparing(Pessoa::getIdade));
+    
+        for(Pessoa pessoa : pessoas){
+            System.out.println(pessoa);
+        }   
+
+        System.out.println();
+        // 12 - uso avançado de streams
+        
+        // flatMap  - achatar listas
+        List<List<String>> listaDeListas = Arrays.asList(
+            Arrays.asList("Maçã", "Morango"),
+            Arrays.asList("Banan", "Mamão"),
+            Arrays.asList("Uva", "Melão"));
+
+        List<String> listaUnica = listaDeListas.stream()
+                                .flatMap(List::stream)
+                                .collect(Collectors.toList());
+
+        System.out.println(listaUnica);
+
+        // pipeline
+        List<Integer> resultado = numeros.stream()
+                            .filter(n -> n % 2 == 0) // filtro de pares
+                            .map(n -> n * 5) // multiplicacao
+                            .sorted() // ordenacao
+                            .collect(Collectors.toList());
+
+        System.out.println(resultado);
 
     }
-}
+}  
